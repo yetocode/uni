@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<textarea id="txt" cols="2" rows="6" style="width: 30rem;height: 15rem" width="500" height="500"></textarea>
+	<button onclick="fun1()">转Unicode</button>
+	<button onclick="fun2()">转中文</button>
+	<div id="txt1"></div>
+</body>
+<script type="text/javascript">
 
-You can use the [editor on GitHub](https://github.com/yetocode/uni/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+function isChinese(s){//判断是否汉字
+	return /[\u4e00-\u9fa5]/.test(s);
+}
+function ch2Unicdoe(str){//得到Unicode
+	if(!str){
+		return;
+	}
+	var unicode = '';
+	for (var i = 0; i <  str.length; i++) {
+		var temp = str.charAt(i);
+		// if(isChinese(temp)){
+			unicode += ' ' +  temp.charCodeAt(0).toString(16);
+		// }
+		// else{
+		// 	unicode += temp;
+		// }
+	}
+	return unicode;
+}
+function fun1(){
+	var a=document.getElementById('txt').value
+	document.getElementById('txt1').innerHTML=ch2Unicdoe(a)
+}
+function fun2(){
+	var a=document.getElementById('txt').value
+	a=a.replace(/\s*/g,"")
+	var tem=''
+	for (var i = 0; i <=a.length-4;i+=4) {
+		tem+=String.fromCharCode(parseInt(a.substr(i, 4),16).toString(10));
+		console.log(tem)
+	}
+	document.getElementById('txt1').innerHTML=tem
+}
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/yetocode/uni/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+</script>
+</html>
